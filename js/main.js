@@ -10,7 +10,7 @@ var data,
     minutes,
     i = 0,
     avatar = 'http://mobpro.com/assets/favicon-96x96.png',
-    random = 1; // 1000 + (Math.random() * 20) * 100;
+    random = 1000 + (Math.random() * 20) * 100;
 
 
 /*--------------------------------------------------
@@ -54,7 +54,7 @@ function getObjects(obj, key, val) {
 WRITE QUESTION
 --------------------------------------------------*/
 function writeQuestion(n) {
-    var question = getObjects(data, 'number', n)[0];
+    question = getObjects(data, 'number', n)[0];
 
     // fake loading
     $('<div class="message loading new"><figure class="avatar"><img src="' + avatar + '" /></figure><span></span></div>').appendTo($('.mCSB_container'));
@@ -73,6 +73,11 @@ function writeQuestion(n) {
             setTimeout(function () {
                 writeMultiAnswer(question);
             }, 500);
+            $('.message-box').css({ bottom: '-40px' });
+        } else if (question.type === 'open') {
+            $('.message-box').css({ bottom: 0 });
+
+            
         }
 
 
@@ -94,7 +99,7 @@ function writeMultiAnswer(question) {
         var answer = question.possible_answers[i];
         var next = question.next[i];
 
-        $('<label><input type="checkbox" value="' + (i + 1) + '" data-next="' + next + '" /> <span>' + answer + '</span></label>').appendTo($('.multi-answer', $multiAnswer));
+        $('<label><input type="checkbox" value="' + (parseInt(i) + 1) + '" data-next="' + next + '" /> <span>' + answer + '</span></label>').appendTo($('.multi-answer', $multiAnswer));
     }
 
     var $next = $('<a href="#" class="message-submit next">Next</a>').appendTo($('.multi-answer', $multiAnswer));
@@ -163,6 +168,58 @@ function nextQuestion() {
         }
     });
 }
+
+
+/*--------------------------------------------------
+SEND MESSAGE
+--------------------------------------------------*/
+function insertMessage() {
+    msg = $('.message-input').val();
+    if ($.trim(msg) === '') {
+        return false;
+    }
+    $('<div class="message message-personal">' + msg + '</div>').appendTo($('.mCSB_container')).addClass('new');
+    setTimestamp();
+    $('.message-input').val(null);
+
+    // send ajax informations
+    console.log(question.track);
+    console.log(msg);
+
+    // fake loading
+    setTimeout(function () {
+        $('<div class="message loading new"><figure class="avatar"><img src="' + avatar + '" /></figure><span></span></div>').appendTo($('.mCSB_container'));
+        updateScrollbar();
+
+        setTimeout(function () {
+            $('.message.loading').remove();
+            $('<div class="message new"><figure class="avatar"><img src="' + avatar + '" /></figure>' + question.r + '</div>').appendTo($('.mCSB_container')).addClass('new');
+            setTimestamp();
+            updateScrollbar();
+
+            setTimeout(function () {
+                writeQuestion(question.next);
+            }, random);
+
+        }, random);
+
+    }, random);
+
+    
+
+
+}
+
+$('.message-submit').on('click', function () {
+    insertMessage();
+});
+
+$(window).on('keydown', function (e) {
+    if (e.which === 13) {
+        insertMessage();
+        return false;
+    }
+})
 
 
 /*--------------------------------------------------

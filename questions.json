@@ -1,6 +1,14 @@
 [
   {
     "number": 1,
+    "type": "open",
+    "intro": "Hi, what do you think about this chat?",
+    "r": "ok clear",
+    "track": "https://mobpro.com/progress/?chat=3&q=1",
+    "next": 2
+  },
+  {
+    "number": 2,
     "type": "mc",
     "intro": "Which teams do you recognize?",
     "number_of_answers": 4,
@@ -11,36 +19,31 @@
       "Reigerboys"
     ],
     "r": "well done",
-    "track": "https://mobpro.com/progress/?chat=3&q=1",
-    "next": {
-      "one": 2,
-      "two": 3,
-      "three": 3,
-      "four": 3
-    }
-  },
-  {
-    "number": 2,
-    "type": "open",
-    "intro": "Tell me what you think about",
-    "r": "ok clear",
     "track": "https://mobpro.com/progress/?chat=3&q=2",
-    "next": 3
+    "next": [ 2, 3, 3, 3]
   },
   {
     "number": 3,
     "type": "open",
-    "intro": "Nice, and do you like it?",
-    "r": "ah, good to know",
+    "intro": "Tell me what you think about",
+    "r": "ok clear",
     "track": "https://mobpro.com/progress/?chat=3&q=3",
-    "next": 4
+    "next": 3
   },
   {
     "number": 4,
     "type": "open",
+    "intro": "Nice, and do you like it?",
+    "r": "ah, good to know",
+    "track": "https://mobpro.com/progress/?chat=3&q=4",
+    "next": 4
+  },
+  {
+    "number": 5,
+    "type": "open",
     "intro": "Thank you for your time. Have a nice day!",
     "r": "",
-    "track": "https://mobpro.com/progress/?chat=3&q=3",
+    "track": "https://mobpro.com/progress/?chat=3&q=5",
     "next": 0
   }
 ]
