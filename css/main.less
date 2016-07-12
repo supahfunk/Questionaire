@@ -263,6 +263,10 @@ Message Box
     padding: 10px;
     position: relative;
 
+    &.disabled {
+        pointer-events: none;
+    }
+
     & .message-input {
         background: none;
         border: none;
@@ -366,6 +370,30 @@ Multi Answer
                 height: 10px;
                 top: 2px;
                 left: 7px;
+            }
+        }
+    }
+
+    &.radio {
+        label {
+            &:before {
+                border-radius: 50%;
+            }
+
+            input:checked ~ span {
+                &:before {
+                    border-radius: 6px;
+                    background: #eee;
+                    width: 6px;
+                    height: 6px;
+                    top: 4px;
+                    left: 4px;
+                    transform: none;
+                }
+
+                &:after {
+                    display: none;
+                }
             }
         }
     }

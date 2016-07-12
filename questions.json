@@ -1,16 +1,20 @@
 [
   {
+    "user": "12349cam-asd",
+    "questionnaire": "test"
+  },
+  {
     "number": 1,
     "type": "open",
-    "intro": "Hi, what do you think about this chat?",
-    "r": "ok clear",
+    "intro": "Tell me what you think about this chat",
+    "r": "Very well",
     "track": "https://mobpro.com/progress/?chat=3&q=1",
     "next": 2
   },
   {
     "number": 2,
-    "type": "mc",
-    "intro": "Which teams do you recognize?",
+    "type": "radio",
+    "intro": "Now answer checking only one of this radio buttons",
     "number_of_answers": 4,
     "possible_answers": [
       "AC Milan",
@@ -20,29 +24,41 @@
     ],
     "r": "well done",
     "track": "https://mobpro.com/progress/?chat=3&q=2",
-    "next": [ 2, 3, 3, 3]
+    "next": [
+      3,
+      3,
+      4,
+      4
+    ]
   },
   {
     "number": 3,
-    "type": "open",
-    "intro": "Tell me what you think about",
-    "r": "ok clear",
-    "track": "https://mobpro.com/progress/?chat=3&q=3",
-    "next": 3
-  },
-  {
-    "number": 4,
-    "type": "open",
-    "intro": "Nice, and do you like it?",
-    "r": "ah, good to know",
+    "type": "checkbox",
+    "intro": "These are checkboxes, instead",
+    "number_of_answers": 4,
+    "possible_answers": [
+      "AC Milan",
+      "Ajax",
+      "FC Barcelona",
+      "Reigerboys"
+    ],
+    "r": "well done",
     "track": "https://mobpro.com/progress/?chat=3&q=4",
     "next": 4
   },
   {
+    "number": 4,
+    "type": "open",
+    "intro": "Do you like it?",
+    "r": "Perfect",
+    "track": "https://mobpro.com/progress/?chat=3&q=4",
+    "next": 5
+  },
+  {
     "number": 5,
     "type": "open",
-    "intro": "Thank you for your time. Have a nice day!",
-    "r": "",
+    "intro": "Nice, have a nice day",
+    "r": "Bye",
     "track": "https://mobpro.com/progress/?chat=3&q=5",
     "next": 0
   }
