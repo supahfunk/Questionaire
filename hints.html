@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Test User Generation</title>
+</head>
+<body>
+	<h2>Use the console Luke.</h2>
+	<script>
+
+		function guid() {
+		  function s4() {
+		    return Math.floor((1 + Math.random()) * 0x10000)
+		      .toString(16)
+		      .substring(1);
+		  }
+		  return s4() + s4() + s4();
+		}
+
+		//split query params and return them
+		function getQueryParams(qs) {
+			qs = qs.split("+").join(" ");
+			var params = {}, tokens,
+			re = /[?&]?([^=]+)=([^&]*)/g;
+			while ((tokens = re.exec(qs)) !== null) {
+				params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+			}
+			return params;
+		}
+
+		//start processing query params
+		var replaceQueryParams = function () {
+			var params = getQueryParams(decodeURIComponent(document.location.search));
+			//var tactic = params.tactic;
+			var mpid = params.mpid;
+			// set value on random number
+			var value = guid();
+			//console.log(mpid);
+			if (mpid !== undefined) {
+				// replace random number with parameters from url if available
+				value = mpid;
+			}
+			docCookies.setItem("mpid",value,"Session","/");
+		};
+
+		var docCookies = {
+		  getItem: function (sKey) {
+		    if (!sKey) { return null; }
+		    return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+		  },
+		  setItem: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
+		    if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
+		    var sExpires = "";
+		    if (vEnd) {
+		      switch (vEnd.constructor) {
+		        case Number:
+		          sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + vEnd;
+		          break;
+		        case String:
+		          sExpires = "; expires=" + vEnd;
+		          break;
+		        case Date:
+		          sExpires = "; expires=" + vEnd.toUTCString();
+		          break;
+		      }
+		    }
+		    document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
+		    return true;
+		  },
+		  removeItem: function (sKey, sPath, sDomain) {
+		    if (!this.hasItem(sKey)) { return false; }
+		    document.cookie = encodeURIComponent(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "");
+		    return true;
+		  },
+		  hasItem: function (sKey) {
+		    if (!sKey) { return false; }
+		    return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
+		  },
+		  keys: function () {
+		    var aKeys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "").split(/\s*(?:\=[^;]*)?;\s*/);
+		    for (var nLen = aKeys.length, nIdx = 0; nIdx < nLen; nIdx++) { aKeys[nIdx] = decodeURIComponent(aKeys[nIdx]); }
+		    return aKeys;
+		  }
+		};
+
+		replaceQueryParams();
+	</script>
+</body>
+</html>

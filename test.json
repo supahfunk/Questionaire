@@ -2,7 +2,7 @@
   {
     "number": 1,
     "type": "open",
-    "intro": "<img src='http://www.supah.it/works/questionaire/img/simple.jpg' />Tell me what you think about this chat",
+    "intro": "Hi, I'm test.json",
     "r": "Very well",
     "track": "https://mobpro.com/progress/?chat=3&q=1",
     "next": 2
