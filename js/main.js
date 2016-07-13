@@ -221,6 +221,7 @@ function sendMessage() {
     }
     $('<div class="message message-personal">' + msg + '</div>').appendTo($('.mCSB_container')).addClass('new');
     setTimestamp();
+    updateScrollbar();
     $('.message-input').val(null);
     $('.message-box').addClass('disabled');
 
